@@ -93,7 +93,8 @@
       "Bash(npm run dev:*)",
       "Bash(sudo rm:*)",
       "Bash(npm cache clean:*)",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "Bash(git config:*)"
     ],
     "deny": []
   }
