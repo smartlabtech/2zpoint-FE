@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # React Frontend Application
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_BASE_URL=${VITE_API_BASE_URL:-http://localhost:3041/api}
+        - VITE_API_LANG=${VITE_API_LANG:-en}
+    image: branding-dashboard:latest
+    container_name: branding-dashboard
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks:
+      - app-network
+
+  # Development service (optional - for local development)
+  frontend-dev:
+    image: node:20-alpine
+    container_name: branding-dashboard-dev
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=development
+    command: sh -c "yarn install && yarn start"
+    profiles:
+      - dev
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+# Optional: Add volumes for persistent data if needed
+volumes:
+  app-data:

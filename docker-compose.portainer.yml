@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: ghcr.io/smartlabtech/brandtopia:master
+    container_name: branding-dashboard
+    ports:
+      - "3001:80"  # Using 3001 to avoid conflicts
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

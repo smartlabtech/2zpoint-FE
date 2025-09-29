@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: ghcr.io/smartlabtech/brand-topia:latest
+    container_name: branding-dashboard
+    ports:
+      - "3001:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production

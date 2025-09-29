@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="/icons/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="192x192" href="/icons/logo192.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary Meta Tags -->
+  <title>BrandBanda - AI-Powered Brand Psychology & Marketing Platform</title>
+  <meta name="title" content="BrandBanda - AI-Powered Brand Psychology & Marketing Platform" />
+  <meta name="description" content="Transform your brand messaging with AI-driven psychological insights. Create compelling content that resonates with your audience using advanced brand psychology." />
+  <meta name="keywords" content="brand psychology, AI marketing, brand messaging, content creation, marketing psychology, brand strategy, AI copywriting, brand identity, marketing automation" />
+  <meta name="author" content="BrandBanda" />
+  <meta name="robots" content="index, follow" />
+  <meta name="language" content="English" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.brandbanda.com/" />
+  <meta property="og:title" content="BrandBanda - AI-Powered Brand Psychology & Marketing Platform" />
+  <meta property="og:description"
+    content="Transform your brand messaging with AI-driven psychological insights. Create compelling content that resonates with your audience using advanced brand psychology." />
+  <meta property="og:image" content="https://www.brandbanda.com/og-image.jpg" />
+  <meta property="og:site_name" content="BrandBanda" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://www.brandbanda.com/" />
+  <meta property="twitter:title" content="BrandBanda - AI-Powered Brand Psychology & Marketing Platform" />
+  <meta property="twitter:description"
+    content="Transform your brand messaging with AI-driven psychological insights. Create compelling content that resonates with your audience using advanced brand psychology." />
+  <meta property="twitter:image" content="https://www.brandbanda.com/og-image.jpg" />
+  <meta property="twitter:site" content="@brandbanda" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#6366F1" />
+  <link rel="apple-touch-icon" href="/logo192.png" />
+
+  <!-- Microsoft Tiles -->
+  <meta name="msapplication-config" content="/browserconfig.xml" />
+  <meta name="msapplication-TileColor" content="#6366F1" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://www.brandbanda.com/" />
+
+  <!-- Additional SEO -->
+  <meta name="googlebot" content="index, follow" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <!-- Performance optimizations -->
+  <!-- DNS prefetch for external resources -->
+  <link rel="dns-prefetch" href="https://ipapi.co" />
+  <link rel="dns-prefetch" href="https://connect.facebook.net" />
+
+  <!-- Preconnect to speed up connections -->
+  <link rel="preconnect" href="https://ipapi.co" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Preload critical fonts if using custom fonts -->
+  <!-- <link rel="preload" href="/fonts/brand-font.woff2" as="font" type="font/woff2" crossorigin /> -->
+
+  <script>
+    // Prevent flash of wrong theme on page load
+    (function () {
+      const colorScheme = localStorage.getItem('mantine-color-scheme') || 'auto';
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = colorScheme === 'dark' || (colorScheme === 'auto' && prefersDark);
+
+      if (isDark) {
+        document.documentElement.setAttribute('data-mantine-color-scheme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-mantine-color-scheme', 'light');
+      }
+    })();
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>
