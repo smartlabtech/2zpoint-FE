@@ -119,7 +119,8 @@ const Landing1_DRY = () => {
 
   // Track landing page view and user interactions
   useEffect(() => {
-    trackingService.trackPageView("2zpoint Landing Page")
+    // Track initial page view - commented out like in Landing2
+    // trackingService.trackPageView("2zpoint Landing Page")
 
     let timeOnPage = 0
     const timeInterval = setInterval(() => {
@@ -127,33 +128,35 @@ const Landing1_DRY = () => {
       trackingService.trackTimeOnPage(timeOnPage, "2zpoint Landing Page")
     }, 30000)
 
-    let maxScroll = 0
-    const handleScroll = () => {
-      const scrollPercentage = Math.round(
-        (window.scrollY /
-          (document.documentElement.scrollHeight - window.innerHeight)) *
-          100
-      )
-      if (scrollPercentage > maxScroll) {
-        maxScroll = scrollPercentage
-        sessionStorage.setItem("maxScrollDepth", maxScroll.toString())
+    // Track scroll depth - commented out like in Landing2
+    // let maxScroll = 0
+    // const handleScroll = () => {
+    //   const scrollPercentage = Math.round(
+    //     (window.scrollY /
+    //       (document.documentElement.scrollHeight - window.innerHeight)) *
+    //       100
+    //   )
+    //   if (scrollPercentage > maxScroll) {
+    //     maxScroll = scrollPercentage
+    //     sessionStorage.setItem("maxScrollDepth", maxScroll.toString())
+    //
+    //     if (
+    //       maxScroll === 25 ||
+    //       maxScroll === 50 ||
+    //       maxScroll === 75 ||
+    //       maxScroll === 100
+    //     ) {
+    //       trackingService.trackScrollDepth(maxScroll)
+    //     }
+    //   }
+    // }
 
-        if (
-          maxScroll === 25 ||
-          maxScroll === 50 ||
-          maxScroll === 75 ||
-          maxScroll === 100
-        ) {
-          trackingService.trackScrollDepth(maxScroll)
-        }
-      }
-    }
+    // window.addEventListener("scroll", handleScroll)
 
-    window.addEventListener("scroll", handleScroll)
-
+    // Cleanup
     return () => {
       clearInterval(timeInterval)
-      window.removeEventListener("scroll", handleScroll)
+      // window.removeEventListener("scroll", handleScroll)
     }
   }, [])
 
@@ -357,7 +360,7 @@ const Header = ({ scroll, styles, isMobile }) => (
             color: "white"
           }}
           onClick={() => {
-            trackingService.trackCtaClick("Join Free Round", "Header")
+            // trackingService.trackCtaClick("Join Free Round", "Header")
             document
               .getElementById("get-started")
               ?.scrollIntoView({ behavior: "smooth" })
@@ -485,7 +488,7 @@ const HeroButtons = ({ isMobile }) => (
         overflow: "hidden"
       }}
       onClick={() => {
-        trackingService.trackCtaClick("Join Free Round", "Hero Section")
+        // trackingService.trackCtaClick("Join Free Round", "Hero Section")
         document
           .getElementById("get-started")
           ?.scrollIntoView({ behavior: "smooth" })
@@ -1072,10 +1075,10 @@ const FAQSection = ({ isMobile, isSmallMobile, faqData, activeFaq, setActiveFaq 
         onChange={(value) => {
           if (value) {
             const faqIndex = parseInt(value.split('-')[1])
-            trackingService.trackFaqInteraction(faqData[faqIndex]?.question, 'expand')
+            // trackingService.trackFaqInteraction(faqData[faqIndex]?.question, 'expand')
           } else if (activeFaq) {
             const faqIndex = parseInt(activeFaq.split('-')[1])
-            trackingService.trackFaqInteraction(faqData[faqIndex]?.question, 'collapse')
+            // trackingService.trackFaqInteraction(faqData[faqIndex]?.question, 'collapse')
           }
           setActiveFaq(value)
         }}
@@ -1141,7 +1144,7 @@ const CountdownSection = ({ isMobile, isSmallMobile, countdown, spotsLeft, style
           color: "#1e40af"
         }}
         onClick={() => {
-          trackingService.trackCtaClick("Reserve Your Spot", "Countdown Section")
+          // trackingService.trackCtaClick("Reserve Your Spot", "Countdown Section")
           navigate("/register")
         }}
       >
@@ -1245,7 +1248,7 @@ const FinalCTASection = ({ isMobile, isSmallMobile }) => (
             padding: isMobile ? "16px 40px" : "18px 60px"
           }}
           onClick={() => {
-            trackingService.trackCtaClick("Join Next Free Round", "Final CTA Section")
+            // trackingService.trackCtaClick("Join Next Free Round", "Final CTA Section")
             navigate("/register")
           }}
         >
