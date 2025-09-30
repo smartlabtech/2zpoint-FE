@@ -22,7 +22,7 @@ import {siteMeta} from "./config/siteMeta"
 import {getCookie} from "./utils/tracking"
 import {initFBPixel} from "./utils/fbPixel"
 import {useFBPixelPageView} from "./hooks/useFBPixel"
-import Landing1 from "./pages/landing/landingPage1/Landing1"
+import Landing1 from "./pages/landing/landingPage1/Landing1_DRY"
 import {Bubble} from "@typebot.io/react"
 
 // Lazy load pages
