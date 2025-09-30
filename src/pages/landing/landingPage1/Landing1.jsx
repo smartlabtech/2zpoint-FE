@@ -469,16 +469,16 @@ const Landing1 = () => {
 
             <Group gap={40} visibleFrom="md">
               <Anchor href="#features" c="gray.6" fw={500}>
-                Features
-              </Anchor>
-              <Anchor href="#community" c="gray.6" fw={500}>
-                Community
-              </Anchor>
-              <Anchor href="#pricing" c="gray.6" fw={500}>
-                Pricing
+                How It Works
               </Anchor>
               <Anchor href="#testimonials" c="gray.6" fw={500}>
                 Success Stories
+              </Anchor>
+              <Anchor href="#faq" c="gray.6" fw={500}>
+                FAQ
+              </Anchor>
+              <Anchor href="#get-started" c="gray.6" fw={500}>
+                Get Started
               </Anchor>
             </Group>
 
@@ -490,7 +490,7 @@ const Landing1 = () => {
               }}
               onClick={() =>
                 document
-                  .getElementById("signup")
+                  .getElementById("get-started")
                   ?.scrollIntoView({behavior: "smooth"})
               }
             >
@@ -603,7 +603,7 @@ const Landing1 = () => {
                   }}
                   onClick={() =>
                     document
-                      .getElementById("learn-more")
+                      .getElementById("get-started")
                       ?.scrollIntoView({behavior: "smooth"})
                   }
                   onMouseEnter={(e) => {
@@ -636,7 +636,7 @@ const Landing1 = () => {
                   }}
                   onClick={() =>
                     document
-                      .getElementById("demo")
+                      .getElementById("testimonials")
                       ?.scrollIntoView({behavior: "smooth"})
                   }
                   onMouseEnter={(e) => {
@@ -1370,7 +1370,7 @@ const Landing1 = () => {
       </Box>
 
       {/* FAQ Section */}
-      <Box py={isMobile ? 60 : 80} style={{background: "white"}}>
+      <Box id="faq" py={isMobile ? 60 : 80} style={{background: "white"}}>
         <Container size="md" px={isMobile ? "16px" : "20px"}>
           <Box ta="center" mb={isMobile ? 40 : 60}>
             <Title
@@ -1518,7 +1518,7 @@ const Landing1 = () => {
       </Container>
 
       {/* Final CTA Section */}
-      <Box py={isMobile ? 60 : 80} style={{background: "#f9fafb"}}>
+      <Box id="get-started" py={isMobile ? 60 : 80} style={{background: "#f9fafb"}}>
         <Container size="xl" px={isMobile ? "16px" : "20px"}>
           <Box ta="center" mb={isMobile ? 40 : 60}>
             <Title
