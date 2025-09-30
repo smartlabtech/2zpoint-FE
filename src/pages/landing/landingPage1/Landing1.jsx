@@ -36,6 +36,8 @@ import {
   MdAutoAwesome,
   MdShowChart
 } from "react-icons/md"
+import SiteMetaTags from "../../../components/SEO/SiteMetaTags"
+import PageSEO from "../../../components/SEO/PageSEO"
 
 const Landing1 = () => {
   const navigate = useNavigate()
@@ -51,9 +53,9 @@ const Landing1 = () => {
   })
 
   // Responsive breakpoints
-  const isMobile = useMediaQuery('(max-width: 768px)')
-  const isSmallMobile = useMediaQuery('(max-width: 480px)')
-  const isTablet = useMediaQuery('(min-width: 769px) and (max-width: 1024px)')
+  const isMobile = useMediaQuery("(max-width: 768px)")
+  const isSmallMobile = useMediaQuery("(max-width: 480px)")
+  const isTablet = useMediaQuery("(min-width: 769px) and (max-width: 1024px)")
 
   // Countdown timer effect
   useEffect(() => {
@@ -255,10 +257,14 @@ const Landing1 = () => {
     }
   }
 
-  // Add CSS animations
+  // Add CSS animations and prevent horizontal scroll
   useEffect(() => {
     const style = document.createElement("style")
     style.textContent = `
+      html, body {
+        overflow-x: hidden !important;
+        max-width: 100% !important;
+      }
       @keyframes float {
         0%, 100% { transform: translateY(0) rotate(0deg); }
         33% { transform: translateY(-30px) rotate(120deg); }
@@ -374,32 +380,55 @@ const Landing1 = () => {
     }
   ]
 
+  // SEO data for the landing page
+  const seoData = {
+    title: "Transform Your Expertise Into a Thriving Side Business",
+    description:
+      "Join 500+ professionals in Egypt building successful side businesses. Live masterclasses, expert mentorship, and a supportive community for entrepreneurs aged 28-50.",
+    keywords:
+      "side business Egypt, entrepreneurship Egypt, professional development, career transition, business coaching, online business, side hustle",
+    type: "website",
+    image: "/og-image-2zpoint.jpg"
+  }
+
   return (
-    <>
+    <Box style={{overflow: "hidden", maxWidth: "100%"}}>
+      {/* SEO Meta Tags */}
+      <SiteMetaTags
+        title="Transform Your Expertise Into a Thriving Side Business"
+        description="Join 500+ professionals in Egypt building successful side businesses. Live masterclasses, expert mentorship, and a supportive community for entrepreneurs aged 28-50."
+        keywords="side business Egypt, entrepreneurship Egypt, professional development, career transition, business coaching, online business, side hustle"
+      />
+      <PageSEO {...seoData} url="/" />
+
       {/* Background */}
-      <Box style={styles.heroBackground}>
+      <Box style={{...styles.heroBackground, overflow: "hidden"}}>
         <Box style={styles.patternOverlay} />
-        <Box
-          style={{
-            ...styles.floatingShape,
-            width: "300px",
-            height: "300px",
-            top: "10%",
-            right: "-150px",
-            opacity: 0.5
-          }}
-        />
-        <Box
-          style={{
-            ...styles.floatingShape,
-            width: "200px",
-            height: "200px",
-            bottom: "10%",
-            left: "-100px",
-            opacity: 0.5,
-            animationDelay: "5s"
-          }}
-        />
+        {!isMobile && (
+          <>
+            <Box
+              style={{
+                ...styles.floatingShape,
+                width: "300px",
+                height: "300px",
+                top: "10%",
+                right: "-150px",
+                opacity: 0.5
+              }}
+            />
+            <Box
+              style={{
+                ...styles.floatingShape,
+                width: "200px",
+                height: "200px",
+                bottom: "10%",
+                left: "-100px",
+                opacity: 0.5,
+                animationDelay: "5s"
+              }}
+            />
+          </>
+        )}
       </Box>
 
       {/* Header */}
@@ -507,7 +536,11 @@ const Landing1 = () => {
 
               <h1
                 style={{
-                  fontSize: isSmallMobile ? "1.75rem" : isMobile ? "2rem" : "3rem",
+                  fontSize: isSmallMobile
+                    ? "1.75rem"
+                    : isMobile
+                    ? "2rem"
+                    : "3rem",
                   lineHeight: isMobile ? 1.2 : 1.1,
                   fontWeight: 800,
                   color: "#111827",
@@ -533,7 +566,11 @@ const Landing1 = () => {
                 c="gray.6"
                 mb={30}
                 style={{
-                  fontSize: isSmallMobile ? "1rem" : isMobile ? "1.1rem" : "1.25rem",
+                  fontSize: isSmallMobile
+                    ? "1rem"
+                    : isMobile
+                    ? "1.1rem"
+                    : "1.25rem",
                   lineHeight: 1.6,
                   animation: "fadeInUp 0.8s ease 0.4s both"
                 }}
@@ -543,37 +580,82 @@ const Landing1 = () => {
                 journey from employee to entrepreneur.
               </Text>
 
-              <Stack
-                gap="md"
-                mb={40}
-                style={{animation: "fadeInUp 0.8s ease 0.5s both"}}
+              <Group
+                gap={16}
+                mt={32}
+                style={{
+                  animation: "fadeInUp 0.8s ease 0.5s both",
+                  display: "flex",
+                  flexDirection: isMobile ? "column" : "row"
+                }}
               >
                 <Button
-                  size={isMobile ? "md" : "lg"}
-                  fullWidth={isMobile}
-                  style={{background: "#1e40af"}}
+                  size="lg"
+                  style={{
+                    background: "#1e40af",
+                    padding: isMobile ? "14px 32px" : "14px 32px",
+                    fontSize: "16px",
+                    fontWeight: 600,
+                    width: isMobile ? "100%" : "auto",
+                    transition: "all 0.3s ease",
+                    position: "relative",
+                    overflow: "hidden"
+                  }}
                   onClick={() =>
                     document
                       .getElementById("learn-more")
                       ?.scrollIntoView({behavior: "smooth"})
                   }
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "#1e3a8a"
+                    e.currentTarget.style.transform = "translateY(-1px)"
+                    e.currentTarget.style.boxShadow =
+                      "0 4px 12px rgba(30, 64, 175, 0.2)"
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "#1e40af"
+                    e.currentTarget.style.transform = "translateY(0)"
+                    e.currentTarget.style.boxShadow = "none"
+                  }}
                 >
                   Join Our Next Free Round
                 </Button>
                 <Button
-                  size={isMobile ? "md" : "lg"}
-                  fullWidth={isMobile}
+                  size="lg"
                   variant="outline"
-                  color="blue.7"
+                  style={{
+                    color: "#1e40af",
+                    borderColor: "#1e40af",
+                    borderWidth: "2px",
+                    padding: isMobile ? "14px 32px" : "14px 32px",
+                    fontSize: "16px",
+                    fontWeight: 600,
+                    width: isMobile ? "100%" : "auto",
+                    transition: "all 0.3s ease",
+                    background: "white"
+                  }}
                   onClick={() =>
                     document
                       .getElementById("demo")
                       ?.scrollIntoView({behavior: "smooth"})
                   }
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "#1e40af"
+                    e.currentTarget.style.color = "white"
+                    e.currentTarget.style.transform = "translateY(-1px)"
+                    e.currentTarget.style.boxShadow =
+                      "0 4px 12px rgba(30, 64, 175, 0.2)"
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "white"
+                    e.currentTarget.style.color = "#1e40af"
+                    e.currentTarget.style.transform = "translateY(0)"
+                    e.currentTarget.style.boxShadow = "none"
+                  }}
                 >
                   Watch Success Stories
                 </Button>
-              </Stack>
+              </Group>
 
               <Group
                 gap={isMobile ? 20 : 40}
@@ -585,57 +667,87 @@ const Landing1 = () => {
                   animation: "fadeInUp 0.8s ease 0.6s both"
                 }}
               >
-                <Box style={{
-                  flex: isMobile ? 1 : "initial",
-                  textAlign: isMobile ? "center" : "left",
-                  position: "relative"
-                }}>
-                  <Text style={{
-                    fontSize: isMobile ? "1.5rem" : "2rem",
-                    fontWeight: 800,
-                    color: "#1e40af"
-                  }}>500+</Text>
-                  <Text style={{
-                    fontSize: isMobile ? "0.75rem" : "0.875rem",
-                    color: "#6b7280",
-                    marginTop: "4px"
-                  }}>Active Members</Text>
+                <Box
+                  style={{
+                    flex: isMobile ? 1 : "initial",
+                    textAlign: isMobile ? "center" : "left",
+                    position: "relative"
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: isMobile ? "1.5rem" : "2rem",
+                      fontWeight: 800,
+                      color: "#1e40af"
+                    }}
+                  >
+                    500+
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: isMobile ? "0.75rem" : "0.875rem",
+                      color: "#6b7280",
+                      marginTop: "4px"
+                    }}
+                  >
+                    Active Members
+                  </Text>
                 </Box>
-                <Box style={{
-                  flex: isMobile ? 1 : "initial",
-                  textAlign: isMobile ? "center" : "left",
-                  position: "relative",
-                  paddingLeft: !isMobile ? "40px" : 0,
-                  borderLeft: !isMobile ? "2px solid #e5e7eb" : "none"
-                }}>
-                  <Text style={{
-                    fontSize: isMobile ? "1.5rem" : "2rem",
-                    fontWeight: 800,
-                    color: "#1e40af"
-                  }}>50+</Text>
-                  <Text style={{
-                    fontSize: isMobile ? "0.75rem" : "0.875rem",
-                    color: "#6b7280",
-                    marginTop: "4px"
-                  }}>Expert Sessions/Year</Text>
+                <Box
+                  style={{
+                    flex: isMobile ? 1 : "initial",
+                    textAlign: isMobile ? "center" : "left",
+                    position: "relative",
+                    paddingLeft: !isMobile ? "40px" : 0,
+                    borderLeft: !isMobile ? "2px solid #e5e7eb" : "none"
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: isMobile ? "1.5rem" : "2rem",
+                      fontWeight: 800,
+                      color: "#1e40af"
+                    }}
+                  >
+                    50+
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: isMobile ? "0.75rem" : "0.875rem",
+                      color: "#6b7280",
+                      marginTop: "4px"
+                    }}
+                  >
+                    Expert Sessions/Year
+                  </Text>
                 </Box>
-                <Box style={{
-                  flex: isMobile ? 1 : "initial",
-                  textAlign: isMobile ? "center" : "left",
-                  position: "relative",
-                  paddingLeft: !isMobile ? "40px" : 0,
-                  borderLeft: !isMobile ? "2px solid #e5e7eb" : "none"
-                }}>
-                  <Text style={{
-                    fontSize: isMobile ? "1.5rem" : "2rem",
-                    fontWeight: 800,
-                    color: "#1e40af"
-                  }}>87%</Text>
-                  <Text style={{
-                    fontSize: isMobile ? "0.75rem" : "0.875rem",
-                    color: "#6b7280",
-                    marginTop: "4px"
-                  }}>Launch Success Rate</Text>
+                <Box
+                  style={{
+                    flex: isMobile ? 1 : "initial",
+                    textAlign: isMobile ? "center" : "left",
+                    position: "relative",
+                    paddingLeft: !isMobile ? "40px" : 0,
+                    borderLeft: !isMobile ? "2px solid #e5e7eb" : "none"
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: isMobile ? "1.5rem" : "2rem",
+                      fontWeight: 800,
+                      color: "#1e40af"
+                    }}
+                  >
+                    87%
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: isMobile ? "0.75rem" : "0.875rem",
+                      color: "#6b7280",
+                      marginTop: "4px"
+                    }}
+                  >
+                    Launch Success Rate
+                  </Text>
                 </Box>
               </Group>
             </Grid.Col>
@@ -973,13 +1085,23 @@ const Landing1 = () => {
       </Box>
 
       {/* Problem Section */}
-      <Container size="xl" px={isMobile ? "16px" : "20px"} my={isMobile ? 40 : 60}>
-        <Box style={{
-          ...styles.problemSection,
-          padding: isMobile ? "30px 20px" : styles.problemSection.padding,
-          margin: isMobile ? "40px 0" : styles.problemSection.margin
-        }}>
-          <Group mb="lg" align={isMobile ? "flex-start" : "center"} wrap={isMobile ? "wrap" : "nowrap"}>
+      <Container
+        size="xl"
+        px={isMobile ? "16px" : "20px"}
+        my={isMobile ? 40 : 60}
+      >
+        <Box
+          style={{
+            ...styles.problemSection,
+            padding: isMobile ? "30px 20px" : styles.problemSection.padding,
+            margin: isMobile ? "40px 0" : styles.problemSection.margin
+          }}
+        >
+          <Group
+            mb="lg"
+            align={isMobile ? "flex-start" : "center"}
+            wrap={isMobile ? "wrap" : "nowrap"}
+          >
             <Box style={styles.warningIcon}>!</Box>
             <Title order={3} c="red.7" size={isMobile ? "1.25rem" : "1.5rem"}>
               The Reality of Building a Side Business After 30
@@ -1116,7 +1238,11 @@ const Landing1 = () => {
       </Box>
 
       {/* Testimonials Section */}
-      <Box id="testimonials" py={isMobile ? 60 : 80} style={{background: "#f9fafb"}}>
+      <Box
+        id="testimonials"
+        py={isMobile ? 60 : 80}
+        style={{background: "#f9fafb"}}
+      >
         <Container size="xl" px={isMobile ? "16px" : "20px"}>
           <Box ta="center" mb={isMobile ? 40 : 60}>
             <Title
@@ -1144,13 +1270,15 @@ const Landing1 = () => {
                   onMouseEnter={(e) => {
                     if (!isMobile) {
                       e.currentTarget.style.transform = "translateY(-5px)"
-                      e.currentTarget.style.boxShadow = "0 15px 40px rgba(0, 0, 0, 0.1)"
+                      e.currentTarget.style.boxShadow =
+                        "0 15px 40px rgba(0, 0, 0, 0.1)"
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!isMobile) {
                       e.currentTarget.style.transform = "translateY(0)"
-                      e.currentTarget.style.boxShadow = "0 10px 30px rgba(0, 0, 0, 0.05)"
+                      e.currentTarget.style.boxShadow =
+                        "0 10px 30px rgba(0, 0, 0, 0.05)"
                     }
                   }}
                 >
@@ -1270,7 +1398,11 @@ const Landing1 = () => {
       </Box>
 
       {/* Countdown Section */}
-      <Container size="xl" px={isMobile ? "16px" : "20px"} my={isMobile ? 40 : 60}>
+      <Container
+        size="xl"
+        px={isMobile ? "16px" : "20px"}
+        my={isMobile ? 40 : 60}
+      >
         <Box
           p={isMobile ? "40px 20px" : "60px"}
           style={{
@@ -1297,11 +1429,13 @@ const Landing1 = () => {
           </Text>
 
           <Group justify="center" gap={isMobile ? "md" : "xl"} mb={40}>
-            <Box style={{
-              ...styles.countdownItem,
-              padding: isMobile ? "16px" : "20px 24px",
-              minWidth: isMobile ? "70px" : "100px"
-            }}>
+            <Box
+              style={{
+                ...styles.countdownItem,
+                padding: isMobile ? "16px" : "20px 24px",
+                minWidth: isMobile ? "70px" : "100px"
+              }}
+            >
               <Text size={isMobile ? rem(32) : rem(40)} fw={800}>
                 {spotsLeft}
               </Text>
@@ -1313,11 +1447,13 @@ const Landing1 = () => {
                 Spots Left
               </Text>
             </Box>
-            <Box style={{
-              ...styles.countdownItem,
-              padding: isMobile ? "16px" : "20px 24px",
-              minWidth: isMobile ? "70px" : "100px"
-            }}>
+            <Box
+              style={{
+                ...styles.countdownItem,
+                padding: isMobile ? "16px" : "20px 24px",
+                minWidth: isMobile ? "70px" : "100px"
+              }}
+            >
               <Text size={isMobile ? rem(32) : rem(40)} fw={800}>
                 {countdown.days}
               </Text>
@@ -1329,11 +1465,13 @@ const Landing1 = () => {
                 Days
               </Text>
             </Box>
-            <Box style={{
-              ...styles.countdownItem,
-              padding: isMobile ? "16px" : "20px 24px",
-              minWidth: isMobile ? "70px" : "100px"
-            }}>
+            <Box
+              style={{
+                ...styles.countdownItem,
+                padding: isMobile ? "16px" : "20px 24px",
+                minWidth: isMobile ? "70px" : "100px"
+              }}
+            >
               <Text size={isMobile ? rem(32) : rem(40)} fw={800}>
                 {countdown.hours}
               </Text>
@@ -1345,11 +1483,13 @@ const Landing1 = () => {
                 Hours
               </Text>
             </Box>
-            <Box style={{
-              ...styles.countdownItem,
-              padding: isMobile ? "16px" : "20px 24px",
-              minWidth: isMobile ? "70px" : "100px"
-            }}>
+            <Box
+              style={{
+                ...styles.countdownItem,
+                padding: isMobile ? "16px" : "20px 24px",
+                minWidth: isMobile ? "70px" : "100px"
+              }}
+            >
               <Text size={isMobile ? rem(32) : rem(40)} fw={800}>
                 {countdown.minutes}
               </Text>
@@ -1398,7 +1538,9 @@ const Landing1 = () => {
           <Box
             style={{
               display: "grid",
-              gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(300px, 1fr))",
+              gridTemplateColumns: isMobile
+                ? "1fr"
+                : "repeat(auto-fit, minmax(300px, 1fr))",
               gap: isMobile ? "16px" : "24px",
               maxWidth: "900px",
               margin: "0 auto 60px auto"
@@ -1474,29 +1616,46 @@ const Landing1 = () => {
         style={{background: "#111827", color: "white"}}
       >
         <Container size="xl" px={isMobile ? "16px" : "20px"}>
-          <Grid gutter={isMobile ? 30 : 40} mb={isMobile ? 30 : 40}>
-            <Grid.Col span={{base: 12, md: 4}}>
+          <Grid
+            gutter={isMobile ? 30 : 40}
+            mb={isMobile ? 30 : 40}
+            columns={12}
+          >
+            <Grid.Col span={{base: 12, xs: 12, sm: 5, md: 5, lg: 4}}>
               <Box
                 style={{
                   display: "flex",
-                  alignItems: "center",
+                  flexDirection: isMobile ? "column" : "row",
+                  alignItems: isMobile ? "center" : "flex-start",
+                  justifyContent: isMobile ? "center" : "flex-start",
                   gap: "8px",
-                  marginBottom: "16px"
+                  marginBottom: "16px",
+                  textAlign: isMobile ? "center" : "left"
                 }}
               >
-                <Box style={styles.logoSquare} />
+                <Box
+                  style={{
+                    ...styles.logoSquare,
+                    margin: isMobile ? "0 auto 8px" : "0"
+                  }}
+                />
                 <Text style={{...styles.logo, color: "white"}}>2zpoint</Text>
               </Box>
               <Text
                 c="#9ca3af"
                 size="sm"
-                style={{lineHeight: 1.6, maxWidth: "300px"}}
+                style={{
+                  lineHeight: 1.6,
+                  maxWidth: "350px",
+                  textAlign: isMobile ? "center" : "left",
+                  margin: isMobile ? "0 auto" : "0"
+                }}
               >
                 Empowering professionals aged 28-50 to build successful side
                 businesses without sacrificing career stability.
               </Text>
             </Grid.Col>
-            <Grid.Col span={{base: 12, sm: 6, md: 2}}>
+            <Grid.Col span={{base: 12, xs: 12, sm: 2.33, md: 2.33, lg: 2.66}}>
               <Text
                 fw={600}
                 size="sm"
@@ -1505,12 +1664,13 @@ const Landing1 = () => {
                 style={{
                   letterSpacing: "1px",
                   color: "#d1d5db",
-                  fontSize: "0.875rem"
+                  fontSize: "0.875rem",
+                  textAlign: isMobile ? "center" : "center"
                 }}
               >
                 Program
               </Text>
-              <Stack gap="xs">
+              <Stack gap="xs" align={isMobile ? "center" : "center"}>
                 <Anchor
                   href="#"
                   style={{
@@ -1573,7 +1733,7 @@ const Landing1 = () => {
                 </Anchor>
               </Stack>
             </Grid.Col>
-            <Grid.Col span={{base: 12, sm: 6, md: 2}}>
+            <Grid.Col span={{base: 12, xs: 12, sm: 2.33, md: 2.33, lg: 2.66}}>
               <Text
                 fw={600}
                 size="sm"
@@ -1582,12 +1742,13 @@ const Landing1 = () => {
                 style={{
                   letterSpacing: "1px",
                   color: "#d1d5db",
-                  fontSize: "0.875rem"
+                  fontSize: "0.875rem",
+                  textAlign: isMobile ? "center" : "center"
                 }}
               >
                 Resources
               </Text>
-              <Stack gap="xs">
+              <Stack gap="xs" align={isMobile ? "center" : "center"}>
                 <Anchor
                   href="#"
                   style={{
@@ -1650,7 +1811,7 @@ const Landing1 = () => {
                 </Anchor>
               </Stack>
             </Grid.Col>
-            <Grid.Col span={{base: 12, sm: 6, md: 2}}>
+            <Grid.Col span={{base: 12, xs: 12, sm: 2.33, md: 2.33, lg: 2.66}}>
               <Text
                 fw={600}
                 size="sm"
@@ -1659,12 +1820,13 @@ const Landing1 = () => {
                 style={{
                   letterSpacing: "1px",
                   color: "#d1d5db",
-                  fontSize: "0.875rem"
+                  fontSize: "0.875rem",
+                  textAlign: isMobile ? "center" : "center"
                 }}
               >
                 Support
               </Text>
-              <Stack gap="xs">
+              <Stack gap="xs" align={isMobile ? "center" : "center"}>
                 <Anchor
                   href="#"
                   style={{
@@ -1731,13 +1893,13 @@ const Landing1 = () => {
 
           <Box pt={32} style={{borderTop: "1px solid #374151"}}>
             <Text ta="center" style={{color: "#9ca3af", fontSize: "0.875rem"}}>
-              © 2025 2zpoint. Designed for ambitious professionals ready to
-              build their legacy.
+              © {new Date().getFullYear()} 2zpoint. Designed for ambitious
+              professionals ready to build their legacy.
             </Text>
           </Box>
         </Container>
       </Box>
-    </>
+    </Box>
   )
 }
 
