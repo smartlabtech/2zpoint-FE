@@ -38,6 +38,7 @@ import {
 } from "react-icons/md"
 import SiteMetaTags from "../../../components/SEO/SiteMetaTags"
 import PageSEO from "../../../components/SEO/PageSEO"
+import trackingService from "../../../services/trackingService"
 
 const Landing1 = () => {
   const navigate = useNavigate()
@@ -110,6 +111,51 @@ const Landing1 = () => {
     return () => {
       clearInterval(timer)
       clearInterval(spotsTimer)
+    }
+  }, [])
+
+  // Track landing page view and user interactions
+  useEffect(() => {
+    // Track initial page view
+    trackingService.trackPageView("2zpoint Landing Page")
+
+    // Track time on page every 30 seconds
+    let timeOnPage = 0
+    const timeInterval = setInterval(() => {
+      timeOnPage += 30
+      trackingService.trackTimeOnPage(timeOnPage, "2zpoint Landing Page")
+    }, 30000)
+
+    // Track scroll depth
+    let maxScroll = 0
+    const handleScroll = () => {
+      const scrollPercentage = Math.round(
+        (window.scrollY /
+          (document.documentElement.scrollHeight - window.innerHeight)) *
+          100
+      )
+      if (scrollPercentage > maxScroll) {
+        maxScroll = scrollPercentage
+        sessionStorage.setItem("maxScrollDepth", maxScroll.toString())
+
+        // Track at 25%, 50%, 75%, and 100%
+        if (
+          maxScroll === 25 ||
+          maxScroll === 50 ||
+          maxScroll === 75 ||
+          maxScroll === 100
+        ) {
+          trackingService.trackScrollDepth(maxScroll)
+        }
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+
+    // Cleanup
+    return () => {
+      clearInterval(timeInterval)
+      window.removeEventListener("scroll", handleScroll)
     }
   }, [])
 
@@ -488,11 +534,12 @@ const Landing1 = () => {
                 background: "#1e40af",
                 color: "white"
               }}
-              onClick={() =>
+              onClick={() => {
+                trackingService.trackCtaClick("Join Free Round", "Header")
                 document
                   .getElementById("get-started")
                   ?.scrollIntoView({behavior: "smooth"})
-              }
+              }}
             >
               Join Free Round
             </Button>
@@ -601,11 +648,12 @@ const Landing1 = () => {
                     position: "relative",
                     overflow: "hidden"
                   }}
-                  onClick={() =>
+                  onClick={() => {
+                    trackingService.trackCtaClick("Join Free Round", "Hero Section")
                     document
                       .getElementById("get-started")
                       ?.scrollIntoView({behavior: "smooth"})
-                  }
+                  }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.background = "#1e3a8a"
                     e.currentTarget.style.transform = "translateY(-1px)"
@@ -1382,7 +1430,20 @@ const Landing1 = () => {
             </Title>
           </Box>
 
-          <Accordion value={activeFaq} onChange={setActiveFaq}>
+          <Accordion
+            value={activeFaq}
+            onChange={(value) => {
+              // Track FAQ interaction
+              if (value) {
+                const faqIndex = parseInt(value.split('-')[1])
+                trackingService.trackFaqInteraction(faqData[faqIndex]?.question, 'expand')
+              } else if (activeFaq) {
+                const faqIndex = parseInt(activeFaq.split('-')[1])
+                trackingService.trackFaqInteraction(faqData[faqIndex]?.question, 'collapse')
+              }
+              setActiveFaq(value)
+            }}
+          >
             {faqData.map((faq, index) => (
               <Accordion.Item key={index} value={`item-${index}`}>
                 <Accordion.Control>
@@ -1510,7 +1571,10 @@ const Landing1 = () => {
               background: "white",
               color: "#1e40af"
             }}
-            onClick={() => navigate("/register")}
+            onClick={() => {
+              trackingService.trackCtaClick("Reserve Your Spot", "Countdown Section")
+              navigate("/register")
+            }}
           >
             Reserve Your Spot - Join Free Round
           </Button>
@@ -1597,7 +1661,10 @@ const Landing1 = () => {
                 fontSize: isMobile ? "1.1rem" : "1.25rem",
                 padding: isMobile ? "16px 40px" : "18px 60px"
               }}
-              onClick={() => navigate("/register")}
+              onClick={() => {
+                trackingService.trackCtaClick("Join Next Free Round", "Final CTA Section")
+                navigate("/register")
+              }}
             >
               Join Our Next Free Round
             </Button>
