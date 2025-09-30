@@ -1,17 +1,17 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  frontend:
-    image: ghcr.io/smartlabtech/brandtopia:master
-    container_name: branding-dashboard
-    ports:
-      - "3001:80"  # Using 3001 to avoid conflicts
+  branding-dashboard:
+    image: ghcr.io/smartlabtech/2zpoint-fe:latest
+    container_name: 2zpoint-fe
     restart: unless-stopped
+    networks:
+      - proxy-network
     environment:
       - NODE_ENV=production
-    networks:
-      - app-network
+      - VITE_FB_PIXEL_ID=1157426736438863
+    # Note: No port mapping needed since NPM will handle routing
 
 networks:
-  app-network:
-    driver: bridge
+  proxy-network:
+    external: true
