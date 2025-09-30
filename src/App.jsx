@@ -15,7 +15,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute"
 import AdminRoute from "./components/auth/AdminRoute"
 import DashboardLayout from "./components/layout/DashboardLayout"
 import AdminLayout from "./components/admin/AdminLayout"
-import {mantineColors} from "./utils/theme/colors"
+import {unifiedTheme} from "./utils/theme/unifiedTheme"
 import {LoadingProvider, AppLoadingOverlay} from "./contexts/LoadingContext"
 import Landing2 from "./pages/landing/LandingPage2/Landing2"
 import {siteMeta} from "./config/siteMeta"
@@ -84,12 +84,8 @@ const queryClient = new QueryClient({
   }
 })
 
-// Create Mantine theme
-const theme = createTheme({
-  colors: mantineColors,
-  primaryColor: "violet",
-  primaryShade: 5
-})
+// Create Mantine theme - Using unified 2zpoint theme
+const theme = createTheme(unifiedTheme.mantine)
 
 // Loading component - using centralized LoadingOverlay
 const PageLoader = () => (

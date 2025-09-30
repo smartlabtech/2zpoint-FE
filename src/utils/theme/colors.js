@@ -1,18 +1,33 @@
 // Color system mapping from Tailwind to Mantine
 export const colors = {
-  // Brand colors
+  // Brand colors - Updated to match 2zpoint branding
   primary: {
-    50: "#eef0ff",
-    100: "#e0e4ff",
-    200: "#c7ccff",
-    300: "#a5aaff",
-    400: "#8080ff",
-    500: "#6467f2", // Main brand color - updated
-    600: "#5659e6",
-    700: "#494bcb",
-    800: "#3d3fa3",
-    900: "#363781",
-    950: "#222349"
+    50: "#eff6ff",
+    100: "#dbeafe",
+    200: "#bfdbfe",
+    300: "#93c5fd",
+    400: "#60a5fa",
+    500: "#3b82f6",
+    600: "#2563eb",
+    700: "#1d4ed8",
+    800: "#1e40af", // Main 2zpoint blue
+    900: "#1e3a8a",
+    950: "#172554"
+  },
+
+  // Secondary brand color (green)
+  secondary: {
+    50: "#f0fdf4",
+    100: "#dcfce7",
+    200: "#bbf7d0",
+    300: "#86efac",
+    400: "#4ade80",
+    500: "#22c55e",
+    600: "#16a34a",
+    700: "#059669", // 2zpoint green
+    800: "#047857",
+    900: "#064e3b",
+    950: "#022c16"
   },
 
   // Semantic colors
@@ -105,11 +120,12 @@ const colorObjectToArray = (colorObj) => [
 // Mantine theme color configuration
 export const mantineColors = {
   primary: colorObjectToArray(colors.primary),
-  violet: colorObjectToArray(colors.primary),
-  green: colorObjectToArray(colors.success),
+  blue: colorObjectToArray(colors.primary), // 2zpoint blue
+  green: colorObjectToArray(colors.secondary), // 2zpoint green
+  success: colorObjectToArray(colors.success),
   red: colorObjectToArray(colors.danger),
   yellow: colorObjectToArray(colors.warning),
-  blue: colorObjectToArray(colors.info),
+  info: colorObjectToArray(colors.info),
   gray: colorObjectToArray(colors.gray),
   dark: [
     colors.gray[50],
@@ -135,12 +151,12 @@ export const getColorShade = (color, shade = 500) => {
 
 export const getSemanticColor = (type) => {
   const semanticMap = {
-    primary: "violet",
-    secondary: "gray",
-    success: "green",
+    primary: "blue",
+    secondary: "green",
+    success: "success",
     danger: "red",
     warning: "yellow",
-    info: "blue"
+    info: "info"
   }
   return semanticMap[type] || type
 }
