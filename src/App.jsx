@@ -23,6 +23,7 @@ import {getCookie} from "./utils/tracking"
 import {initFBPixel} from "./utils/fbPixel"
 import {useFBPixelPageView} from "./hooks/useFBPixel"
 import Landing1 from "./pages/landing/landingPage1/Landing1"
+import {Bubble} from "@typebot.io/react"
 
 // Lazy load pages
 const Landing = lazy(() => import("./pages/landing/Landing"))
@@ -431,6 +432,12 @@ function App() {
                   </Routes>
                 </Suspense>
               </Router>
+              {/* Typebot Chat Bubble */}
+              <Bubble
+                typebot="2-z-point-support-iik55lb"
+                apiHost="https://typebotviewer.geeksenv.com"
+                theme={{button: {backgroundColor: "#0042DA"}}}
+              />
             </LoadingProvider>
           </QueryClientProvider>
         </PersistGate>
