@@ -47,7 +47,7 @@ export const siteMeta = {
   // Analytics & Tracking
   analytics: {
     GA_MEASUREMENT_ID: import.meta.env.VITE_GA_ID || "",
-    FB_PIXEL_ID: "1157426736438863",
+    FB_PIXEL_ID: import.meta.env.VITE_FB_PIXEL_ID || "",
     GTM_ID: import.meta.env.VITE_GTM_ID || "",
     HOTJAR_ID: import.meta.env.VITE_HOTJAR_ID || "",
     CLARITY_ID: import.meta.env.VITE_CLARITY_ID || ""

@@ -7,9 +7,9 @@ services:
     restart: unless-stopped
     networks:
       - proxy-network
-    environment:
-      - NODE_ENV=production
-      - VITE_FB_PIXEL_ID=1157426736438863
+    # environment:
+    # - NODE_ENV=production
+    # - VITE_FB_PIXEL_ID=1157426736438863
     # Note: No port mapping needed since NPM will handle routing
 
 networks:
