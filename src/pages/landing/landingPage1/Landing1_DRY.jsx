@@ -3,8 +3,8 @@
  * Preserves all original styling and animations while making code reusable
  */
 
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, {useEffect, useState} from "react"
+import {useNavigate} from "react-router-dom"
 import {
   Container,
   Text,
@@ -22,8 +22,8 @@ import {
   Affix,
   Transition,
   rem
-} from '@mantine/core'
-import { useWindowScroll, useMediaQuery } from '@mantine/hooks'
+} from "@mantine/core"
+import {useWindowScroll, useMediaQuery} from "@mantine/hooks"
 import {
   MdCheck,
   MdWarning,
@@ -35,18 +35,18 @@ import {
   MdSchool,
   MdAutoAwesome,
   MdShowChart
-} from 'react-icons/md'
+} from "react-icons/md"
 
 // SEO components
-import SiteMetaTags from '../../../components/SEO/SiteMetaTags'
-import PageSEO from '../../../components/SEO/PageSEO'
-import trackingService from '../../../services/trackingService'
+import SiteMetaTags from "../../../components/SEO/SiteMetaTags"
+import PageSEO from "../../../components/SEO/PageSEO"
+import trackingService from "../../../services/trackingService"
 
 // Theme utilities (we'll use these where appropriate but keep original styles)
-import { theme2zpoint } from '../../../utils/theme/2zpointTheme'
+import {theme2zpoint} from "../../../utils/theme/2zpointTheme"
 
 // Landing Data
-import { landingData } from './landingData'
+import {landingData} from "./landingData"
 
 const Landing1_DRY = () => {
   const navigate = useNavigate()
@@ -89,7 +89,7 @@ const Landing1_DRY = () => {
         )
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
 
-        setCountdown({ days, hours, minutes })
+        setCountdown({days, hours, minutes})
 
         const spots = localStorage.getItem("spotsLeft") || "12"
         setSpotsLeft(parseInt(spots))
@@ -119,8 +119,8 @@ const Landing1_DRY = () => {
 
   // Track landing page view and user interactions
   useEffect(() => {
-    // Track initial page view - commented out like in Landing2
-    // trackingService.trackPageView("2zpoint Landing Page")
+    // Track initial page view
+    trackingService.trackPageView("2zpoint Landing Page")
 
     let timeOnPage = 0
     const timeInterval = setInterval(() => {
@@ -193,7 +193,7 @@ const Landing1_DRY = () => {
   }, [])
 
   return (
-    <Box style={{ overflow: "hidden", maxWidth: "100%" }}>
+    <Box style={{overflow: "hidden", maxWidth: "100%"}}>
       {/* SEO Meta Tags */}
       <SiteMetaTags {...landingData.seo} />
       <PageSEO {...landingData.seo} url="/" />
@@ -254,10 +254,7 @@ const Landing1_DRY = () => {
       />
 
       {/* Final CTA Section */}
-      <FinalCTASection
-        isMobile={isMobile}
-        isSmallMobile={isSmallMobile}
-      />
+      <FinalCTASection isMobile={isMobile} isSmallMobile={isSmallMobile} />
 
       {/* Footer */}
       <Footer isMobile={isMobile} styles={styles} />
@@ -266,7 +263,7 @@ const Landing1_DRY = () => {
 }
 
 // Hero Background Component
-const HeroBackground = ({ isMobile, styles }) => (
+const HeroBackground = ({isMobile, styles}) => (
   <>
     <Box style={styles.heroBackground}>
       <Box style={styles.patternOverlay} />
@@ -300,7 +297,7 @@ const HeroBackground = ({ isMobile, styles }) => (
 )
 
 // Header Component
-const Header = ({ scroll, styles, isMobile }) => (
+const Header = ({scroll, styles, isMobile}) => (
   <Box
     component="header"
     style={{
@@ -345,7 +342,9 @@ const Header = ({ scroll, styles, isMobile }) => (
               fw={500}
               onClick={(e) => {
                 e.preventDefault()
-                document.querySelector(item.href)?.scrollIntoView({ behavior: "smooth" })
+                document
+                  .querySelector(item.href)
+                  ?.scrollIntoView({behavior: "smooth"})
               }}
             >
               {item.label}
@@ -363,7 +362,7 @@ const Header = ({ scroll, styles, isMobile }) => (
             // trackingService.trackCtaClick("Join Free Round", "Header")
             document
               .getElementById("get-started")
-              ?.scrollIntoView({ behavior: "smooth" })
+              ?.scrollIntoView({behavior: "smooth"})
           }}
         >
           Join Free Round
@@ -374,7 +373,7 @@ const Header = ({ scroll, styles, isMobile }) => (
 )
 
 // Hero Section Component
-const HeroSection = ({ isMobile, isSmallMobile, styles }) => (
+const HeroSection = ({isMobile, isSmallMobile, styles}) => (
   <Box
     component="section"
     style={{
@@ -387,7 +386,7 @@ const HeroSection = ({ isMobile, isSmallMobile, styles }) => (
   >
     <Container size="xl" px={isMobile ? "16px" : "20px"}>
       <Grid gutter={isMobile ? 40 : 60} align="center">
-        <Grid.Col span={{ base: 12, md: 6 }}>
+        <Grid.Col span={{base: 12, md: 6}}>
           <Box
             style={{
               ...styles.trustBadge,
@@ -403,18 +402,14 @@ const HeroSection = ({ isMobile, isSmallMobile, styles }) => (
             >
               ✔
             </span>
-            <span style={{ color: "#111827" }}>
+            <span style={{color: "#111827"}}>
               {landingData.hero.trustBadge}
             </span>
           </Box>
 
           <h1
             style={{
-              fontSize: isSmallMobile
-                ? "1.75rem"
-                : isMobile
-                ? "2rem"
-                : "3rem",
+              fontSize: isSmallMobile ? "1.75rem" : isMobile ? "2rem" : "3rem",
               lineHeight: isMobile ? 1.2 : 1.1,
               fontWeight: 800,
               color: "#111827",
@@ -456,7 +451,7 @@ const HeroSection = ({ isMobile, isSmallMobile, styles }) => (
           <HeroStats isMobile={isMobile} styles={styles} />
         </Grid.Col>
 
-        <Grid.Col span={{ base: 12, md: 6 }} visibleFrom="md">
+        <Grid.Col span={{base: 12, md: 6}} visibleFrom="md">
           <AchievementDashboard />
         </Grid.Col>
       </Grid>
@@ -465,7 +460,7 @@ const HeroSection = ({ isMobile, isSmallMobile, styles }) => (
 )
 
 // Hero Buttons Component
-const HeroButtons = ({ isMobile }) => (
+const HeroButtons = ({isMobile}) => (
   <Group
     gap={16}
     mt={32}
@@ -491,7 +486,7 @@ const HeroButtons = ({ isMobile }) => (
         // trackingService.trackCtaClick("Join Free Round", "Hero Section")
         document
           .getElementById("get-started")
-          ?.scrollIntoView({ behavior: "smooth" })
+          ?.scrollIntoView({behavior: "smooth"})
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.background = "#1e3a8a"
@@ -524,7 +519,7 @@ const HeroButtons = ({ isMobile }) => (
       onClick={() =>
         document
           .getElementById("testimonials")
-          ?.scrollIntoView({ behavior: "smooth" })
+          ?.scrollIntoView({behavior: "smooth"})
       }
       onMouseEnter={(e) => {
         e.currentTarget.style.background = "#1e40af"
@@ -545,7 +540,7 @@ const HeroButtons = ({ isMobile }) => (
 )
 
 // Hero Stats Component
-const HeroStats = ({ isMobile, styles }) => (
+const HeroStats = ({isMobile, styles}) => (
   <Group
     gap={isMobile ? 20 : 40}
     justify={isMobile ? "space-between" : "flex-start"}
@@ -676,12 +671,7 @@ const AchievementDashboard = () => (
           borderRadius: "8px"
         }}
       >
-        <Text
-          size="xs"
-          c="#6b7280"
-          mb="xs"
-          style={{ fontSize: "0.875rem" }}
-        >
+        <Text size="xs" c="#6b7280" mb="xs" style={{fontSize: "0.875rem"}}>
           Member Success Rate
         </Text>
         <Box
@@ -708,7 +698,7 @@ const AchievementDashboard = () => (
 )
 
 // Achievement Card Component
-const AchievementCard = ({ metric, value, subtitle }) => (
+const AchievementCard = ({metric, value, subtitle}) => (
   <Box
     style={{
       background: "#f9fafb",
@@ -730,7 +720,7 @@ const AchievementCard = ({ metric, value, subtitle }) => (
     <Text
       size="xs"
       c="#6b7280"
-      style={{ fontSize: "0.875rem", marginBottom: "8px" }}
+      style={{fontSize: "0.875rem", marginBottom: "8px"}}
     >
       {metric}
     </Text>
@@ -743,12 +733,7 @@ const AchievementCard = ({ metric, value, subtitle }) => (
     >
       {value}
     </Text>
-    <Text
-      size="xs"
-      c="#059669"
-      fw={600}
-      style={{ fontSize: "0.75rem" }}
-    >
+    <Text size="xs" c="#059669" fw={600} style={{fontSize: "0.75rem"}}>
       {subtitle}
     </Text>
   </Box>
@@ -756,10 +741,7 @@ const AchievementCard = ({ metric, value, subtitle }) => (
 
 // Social Proof Bar Component
 const SocialProofBar = () => (
-  <Box
-    py={30}
-    style={{ background: "white", borderBottom: "1px solid #e5e7eb" }}
-  >
+  <Box py={30} style={{background: "white", borderBottom: "1px solid #e5e7eb"}}>
     <Container size="xl" px="20px">
       <Text
         ta="center"
@@ -767,7 +749,7 @@ const SocialProofBar = () => (
         c="gray.6"
         mb="lg"
         tt="uppercase"
-        style={{ letterSpacing: "1px" }}
+        style={{letterSpacing: "1px"}}
       >
         {landingData.socialProof.title}
       </Text>
@@ -778,7 +760,7 @@ const SocialProofBar = () => (
             fw={700}
             size="xl"
             c="gray.6"
-            style={{ opacity: 0.6 }}
+            style={{opacity: 0.6}}
           >
             {company}
           </Text>
@@ -789,12 +771,8 @@ const SocialProofBar = () => (
 )
 
 // Problem Section Component
-const ProblemSection = ({ isMobile, styles, data }) => (
-  <Container
-    size="xl"
-    px={isMobile ? "16px" : "20px"}
-    my={isMobile ? 40 : 60}
-  >
+const ProblemSection = ({isMobile, styles, data}) => (
+  <Container size="xl" px={isMobile ? "16px" : "20px"} my={isMobile ? 40 : 60}>
     <Box
       style={{
         ...styles.problemSection,
@@ -819,7 +797,7 @@ const ProblemSection = ({ isMobile, styles, data }) => (
             <Text c="red.6" fw="bold">
               →
             </Text>
-            <Text c="gray.6" style={{ flex: 1, lineHeight: 1.6 }}>
+            <Text c="gray.6" style={{flex: 1, lineHeight: 1.6}}>
               {problem}
             </Text>
           </Group>
@@ -844,8 +822,8 @@ const ProblemSection = ({ isMobile, styles, data }) => (
 )
 
 // Features Section Component
-const FeaturesSection = ({ isMobile, isSmallMobile, features }) => (
-  <Box id="features" py={isMobile ? 60 : 80} style={{ background: "white" }}>
+const FeaturesSection = ({isMobile, isSmallMobile, features}) => (
+  <Box id="features" py={isMobile ? 60 : 80} style={{background: "white"}}>
     <Container size="xl" px={isMobile ? "16px" : "20px"}>
       <Box ta="center" mb={isMobile ? 40 : 60}>
         <Title
@@ -863,7 +841,7 @@ const FeaturesSection = ({ isMobile, isSmallMobile, features }) => (
 
       <Grid gutter={isMobile ? 20 : 30}>
         {features.items.map((feature, index) => (
-          <Grid.Col key={index} span={{ base: 12, sm: 6, md: 4 }}>
+          <Grid.Col key={index} span={{base: 12, sm: 6, md: 4}}>
             <FeatureCard feature={feature} index={index} isMobile={isMobile} />
           </Grid.Col>
         ))}
@@ -873,7 +851,7 @@ const FeaturesSection = ({ isMobile, isSmallMobile, features }) => (
 )
 
 // Feature Card Component
-const FeatureCard = ({ feature, index, isMobile }) => (
+const FeatureCard = ({feature, index, isMobile}) => (
   <Card
     p="xl"
     radius="lg"
@@ -913,18 +891,18 @@ const FeatureCard = ({ feature, index, isMobile }) => (
     <Title order={4} mb="xs">
       {feature.title}
     </Title>
-    <Text c="gray.6" style={{ lineHeight: 1.6 }}>
+    <Text c="gray.6" style={{lineHeight: 1.6}}>
       {feature.description}
     </Text>
   </Card>
 )
 
 // Testimonials Section Component
-const TestimonialsSection = ({ isMobile, isSmallMobile, testimonials }) => (
+const TestimonialsSection = ({isMobile, isSmallMobile, testimonials}) => (
   <Box
     id="testimonials"
     py={isMobile ? 60 : 80}
-    style={{ background: "#f9fafb" }}
+    style={{background: "#f9fafb"}}
   >
     <Container size="xl" px={isMobile ? "16px" : "20px"}>
       <Box ta="center" mb={isMobile ? 40 : 60}>
@@ -939,7 +917,7 @@ const TestimonialsSection = ({ isMobile, isSmallMobile, testimonials }) => (
 
       <Grid gutter={isMobile ? 20 : 30}>
         {testimonials.map((testimonial, index) => (
-          <Grid.Col key={index} span={{ base: 12, md: 4 }}>
+          <Grid.Col key={index} span={{base: 12, md: 4}}>
             <TestimonialCard testimonial={testimonial} isMobile={isMobile} />
           </Grid.Col>
         ))}
@@ -949,7 +927,7 @@ const TestimonialsSection = ({ isMobile, isSmallMobile, testimonials }) => (
 )
 
 // Testimonial Card Component
-const TestimonialCard = ({ testimonial, isMobile }) => (
+const TestimonialCard = ({testimonial, isMobile}) => (
   <Box
     className="animate-on-scroll"
     style={{
@@ -1057,8 +1035,14 @@ const TestimonialCard = ({ testimonial, isMobile }) => (
 )
 
 // FAQ Section Component
-const FAQSection = ({ isMobile, isSmallMobile, faqData, activeFaq, setActiveFaq }) => (
-  <Box id="faq" py={isMobile ? 60 : 80} style={{ background: "white" }}>
+const FAQSection = ({
+  isMobile,
+  isSmallMobile,
+  faqData,
+  activeFaq,
+  setActiveFaq
+}) => (
+  <Box id="faq" py={isMobile ? 60 : 80} style={{background: "white"}}>
     <Container size="md" px={isMobile ? "16px" : "20px"}>
       <Box ta="center" mb={isMobile ? 40 : 60}>
         <Title
@@ -1074,10 +1058,10 @@ const FAQSection = ({ isMobile, isSmallMobile, faqData, activeFaq, setActiveFaq 
         value={activeFaq}
         onChange={(value) => {
           if (value) {
-            const faqIndex = parseInt(value.split('-')[1])
+            const faqIndex = parseInt(value.split("-")[1])
             // trackingService.trackFaqInteraction(faqData[faqIndex]?.question, 'expand')
           } else if (activeFaq) {
-            const faqIndex = parseInt(activeFaq.split('-')[1])
+            const faqIndex = parseInt(activeFaq.split("-")[1])
             // trackingService.trackFaqInteraction(faqData[faqIndex]?.question, 'collapse')
           }
           setActiveFaq(value)
@@ -1099,12 +1083,14 @@ const FAQSection = ({ isMobile, isSmallMobile, faqData, activeFaq, setActiveFaq 
 )
 
 // Countdown Section Component
-const CountdownSection = ({ isMobile, isSmallMobile, countdown, spotsLeft, styles }) => (
-  <Container
-    size="xl"
-    px={isMobile ? "16px" : "20px"}
-    my={isMobile ? 40 : 60}
-  >
+const CountdownSection = ({
+  isMobile,
+  isSmallMobile,
+  countdown,
+  spotsLeft,
+  styles
+}) => (
+  <Container size="xl" px={isMobile ? "16px" : "20px"} my={isMobile ? 40 : 60}>
     <Box
       p={isMobile ? "40px 20px" : "60px"}
       style={{
@@ -1125,15 +1111,35 @@ const CountdownSection = ({ isMobile, isSmallMobile, countdown, spotsLeft, style
       >
         {landingData.countdown.title}
       </Title>
-      <Text size={isMobile ? "md" : "lg"} mb={40} style={{ opacity: 0.9 }}>
+      <Text size={isMobile ? "md" : "lg"} mb={40} style={{opacity: 0.9}}>
         {landingData.countdown.subtitle}
       </Text>
 
       <Group justify="center" gap={isMobile ? "md" : "xl"} mb={40}>
-        <CountdownItem value={spotsLeft} label="Spots Left" isMobile={isMobile} styles={styles} />
-        <CountdownItem value={countdown.days} label="Days" isMobile={isMobile} styles={styles} />
-        <CountdownItem value={countdown.hours} label="Hours" isMobile={isMobile} styles={styles} />
-        <CountdownItem value={countdown.minutes} label="Minutes" isMobile={isMobile} styles={styles} />
+        <CountdownItem
+          value={spotsLeft}
+          label="Spots Left"
+          isMobile={isMobile}
+          styles={styles}
+        />
+        <CountdownItem
+          value={countdown.days}
+          label="Days"
+          isMobile={isMobile}
+          styles={styles}
+        />
+        <CountdownItem
+          value={countdown.hours}
+          label="Hours"
+          isMobile={isMobile}
+          styles={styles}
+        />
+        <CountdownItem
+          value={countdown.minutes}
+          label="Minutes"
+          isMobile={isMobile}
+          styles={styles}
+        />
       </Group>
 
       <Button
@@ -1155,7 +1161,7 @@ const CountdownSection = ({ isMobile, isSmallMobile, countdown, spotsLeft, style
 )
 
 // Countdown Item Component
-const CountdownItem = ({ value, label, isMobile, styles }) => (
+const CountdownItem = ({value, label, isMobile, styles}) => (
   <Box
     style={{
       ...styles.counterBox,
@@ -1166,19 +1172,15 @@ const CountdownItem = ({ value, label, isMobile, styles }) => (
     <Text size={isMobile ? rem(32) : rem(40)} fw={800}>
       {value}
     </Text>
-    <Text
-      size="xs"
-      tt="uppercase"
-      style={{ letterSpacing: "1px", opacity: 0.9 }}
-    >
+    <Text size="xs" tt="uppercase" style={{letterSpacing: "1px", opacity: 0.9}}>
       {label}
     </Text>
   </Box>
 )
 
 // Final CTA Section Component
-const FinalCTASection = ({ isMobile, isSmallMobile }) => (
-  <Box id="get-started" py={isMobile ? 60 : 80} style={{ background: "#f9fafb" }}>
+const FinalCTASection = ({isMobile, isSmallMobile}) => (
+  <Box id="get-started" py={isMobile ? 60 : 80} style={{background: "#f9fafb"}}>
     <Container size="xl" px={isMobile ? "16px" : "20px"}>
       <Box ta="center" mb={isMobile ? 40 : 60}>
         <Title
@@ -1197,7 +1199,9 @@ const FinalCTASection = ({ isMobile, isSmallMobile }) => (
       <Box
         style={{
           display: "grid",
-          gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(300px, 1fr))",
+          gridTemplateColumns: isMobile
+            ? "1fr"
+            : "repeat(auto-fit, minmax(300px, 1fr))",
           gap: isMobile ? "16px" : "24px",
           maxWidth: "900px",
           margin: "0 auto 60px auto"
@@ -1255,7 +1259,8 @@ const FinalCTASection = ({ isMobile, isSmallMobile }) => (
           Join Our Next Free Round
         </Button>
         <Text mt="md" c="gray.6" size="sm">
-          Limited spots available • Community-driven learning • 100% free to start
+          Limited spots available • Community-driven learning • 100% free to
+          start
         </Text>
       </Box>
     </Container>
@@ -1263,22 +1268,18 @@ const FinalCTASection = ({ isMobile, isSmallMobile }) => (
 )
 
 // Footer Component
-const Footer = ({ isMobile, styles }) => {
+const Footer = ({isMobile, styles}) => {
   const navigate = useNavigate()
 
   return (
     <Box
       component="footer"
       py={isMobile ? "40px 0 30px" : "60px 0"}
-      style={{ background: "#111827", color: "white" }}
+      style={{background: "#111827", color: "white"}}
     >
       <Container size="xl" px={isMobile ? "16px" : "20px"}>
-        <Grid
-          gutter={isMobile ? 30 : 40}
-          mb={isMobile ? 30 : 40}
-          columns={12}
-        >
-          <Grid.Col span={{ base: 12, xs: 12, sm: 5, md: 5, lg: 4 }}>
+        <Grid gutter={isMobile ? 30 : 40} mb={isMobile ? 30 : 40} columns={12}>
+          <Grid.Col span={{base: 12, xs: 12, sm: 5, md: 5, lg: 4}}>
             <Box
               style={{
                 display: "flex",
@@ -1296,7 +1297,7 @@ const Footer = ({ isMobile, styles }) => {
                   margin: isMobile ? "0 auto 8px" : "0"
                 }}
               />
-              <Text style={{ ...styles.logo, color: "white" }}>2zpoint</Text>
+              <Text style={{...styles.logo, color: "white"}}>2zpoint</Text>
             </Box>
             <Text
               c="#9ca3af"
@@ -1313,7 +1314,10 @@ const Footer = ({ isMobile, styles }) => {
           </Grid.Col>
 
           {landingData.footer.sections.map((section, index) => (
-            <Grid.Col key={index} span={{ base: 12, xs: 12, sm: 2.33, md: 2.33, lg: 2.66 }}>
+            <Grid.Col
+              key={index}
+              span={{base: 12, xs: 12, sm: 2.33, md: 2.33, lg: 2.66}}
+            >
               <Text
                 fw={600}
                 size="sm"
@@ -1339,8 +1343,12 @@ const Footer = ({ isMobile, styles }) => {
                       textDecoration: "none",
                       transition: "color 0.3s ease"
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "white")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "#9ca3af")}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.color = "white")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.color = "#9ca3af")
+                    }
                   >
                     {link.label}
                   </Anchor>
@@ -1350,9 +1358,10 @@ const Footer = ({ isMobile, styles }) => {
           ))}
         </Grid>
 
-        <Box pt={32} style={{ borderTop: "1px solid #374151" }}>
-          <Text ta="center" style={{ color: "#9ca3af", fontSize: "0.875rem" }}>
-            © {new Date().getFullYear()} 2zpoint. Designed for ambitious professionals ready to build their legacy.
+        <Box pt={32} style={{borderTop: "1px solid #374151"}}>
+          <Text ta="center" style={{color: "#9ca3af", fontSize: "0.875rem"}}>
+            © {new Date().getFullYear()} 2zpoint. Designed for ambitious
+            professionals ready to build their legacy.
           </Text>
         </Box>
       </Container>
@@ -1368,7 +1377,8 @@ const getStyles = (isMobile, isSmallMobile, scroll) => ({
     left: 0,
     right: 0,
     height: "100vh",
-    background: "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #dbeafe 100%)",
+    background:
+      "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #dbeafe 100%)",
     zIndex: -1,
     overflow: "hidden"
   },
@@ -1385,7 +1395,8 @@ const getStyles = (isMobile, isSmallMobile, scroll) => ({
   floatingShape: {
     position: "absolute",
     borderRadius: "50%",
-    background: "linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(5, 150, 105, 0.1))",
+    background:
+      "linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(5, 150, 105, 0.1))",
     animation: "float 20s ease-in-out infinite",
     pointerEvents: "none"
   },
